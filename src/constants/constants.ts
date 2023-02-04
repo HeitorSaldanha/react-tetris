@@ -6,11 +6,13 @@ import { TETROMINO_TYPE, CELL_CONTENT } from '@enums';
 export const STAGE_WIDTH = 12;
 export const STAGE_HEIGHT = 20;
 export const ROWPOINTS = [40, 100, 300, 1200];
+const INITIAL_Y = 0;
 export const INITIAL_POS = {
   x: STAGE_WIDTH / 2 - 2,
-  y: 0,
+  y: INITIAL_Y,
 };
 export const INITIAL_DROPTIME = 1000;
+export const LEVEL_DIFFICULTY_INCREMENT = 10;
 
 // Tetrominos characteristics
 

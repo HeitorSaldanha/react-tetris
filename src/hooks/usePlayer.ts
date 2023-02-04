@@ -76,8 +76,9 @@ export const usePlayer: UsePlayer = () => {
 
   const resetPlayer = useCallback((): void => {
     const newTetromino = randomTetromino();
+    console.log(INITIAL_POS);
     setPlayer({
-      pos: INITIAL_POS,
+      pos: { ...INITIAL_POS },
       tetromino: {
         shape: newTetromino.shape,
         type: newTetromino.type as TETROMINO_TYPE,
