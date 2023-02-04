@@ -21,7 +21,14 @@ export enum CELL_TYPE {
 
 export enum PLAYER_DIRECTION {
   LEFT = 37,
+  UP = 38,
   RIGHT = 39,
   DOWN = 40,
-  UP = 38,
+}
+
+export enum MOVE_DISTANCE {
+  LEFT = -1,
+  RIGHT = 1,
+  DOWN = 30,
+  DROP = 1,
 }

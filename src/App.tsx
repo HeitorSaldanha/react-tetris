@@ -7,10 +7,11 @@ import { StartButton } from '@components/StartButton';
 import { useStage } from '@hooks/useStage';
 import { usePlayer } from '@hooks/usePlayer';
 import { useInterval } from '@hooks/useInterval';
+import { useCollision } from '@hooks/useCollision';
 
 import { createStage } from '@utils/gameHelpers';
 
-import { PLAYER_DIRECTION } from '@enums';
+import { PLAYER_DIRECTION, MOVE_DISTANCE } from '@enums';
 import { INITIAL_DROPTIME } from '@constants';
 
 import { StyledTetrisWrapper, StyledTetris } from './App.styles';
@@ -40,9 +41,12 @@ const App: React.FC = () => {
 
   const { player, updatePlayerPos, resetPlayer } = usePlayer();
   const { stage, setStage } = useStage(player, resetPlayer);
+  const isColliding = useCollision();
 
   const movePlayer = (direction: number) => {
-    updatePlayerPos({ x: direction, y: 0, collided: false });
+    if (!isColliding(player, stage, { x: direction, y: 0 })) {
+      updatePlayerPos({ x: direction, y: 0, collided: false });
+    }
   };
 
   const move = ({
@@ -53,12 +57,12 @@ const App: React.FC = () => {
     repeat: boolean;
   }): void => {
     if (keyCode === PLAYER_DIRECTION.LEFT) {
-      movePlayer(-1);
+      movePlayer(MOVE_DISTANCE.LEFT);
     } else if (keyCode === PLAYER_DIRECTION.RIGHT) {
-      movePlayer(1);
+      movePlayer(MOVE_DISTANCE.RIGHT);
     } else if (keyCode === PLAYER_DIRECTION.DOWN) {
       if (repeat) return;
-      setDroptime(30);
+      setDroptime(MOVE_DISTANCE.DOWN);
     } else if (keyCode === PLAYER_DIRECTION.UP) {
       // TODO add rotation
     }
@@ -82,11 +86,21 @@ const App: React.FC = () => {
   };
 
   const drop = (): void => {
-    updatePlayerPos({ x: 0, y: 1, collided: false });
+    if (!isColliding(player, stage, { x: 0, y: MOVE_DISTANCE.DROP })) {
+      updatePlayerPos({ x: 0, y: MOVE_DISTANCE.DROP, collided: false });
+    } else {
+      if (player.pos.y < 1) {
+        setGameOver(true);
+        setDroptime(0);
+      }
+      updatePlayerPos({ x: 0, y: 0, collided: true });
+    }
   };
 
   useInterval(() => {
-    drop();
+    if (!gameOver) {
+      drop();
+    }
   }, droptime);
 
   return (

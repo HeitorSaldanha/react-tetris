@@ -1,5 +1,5 @@
-import { STAGE_WIDTH, STAGE_HEIGHT, TETROMINOS } from '@constants';
 import { TETROMINO_TYPE, CELL_TYPE, CELL_CONTENT } from '@enums';
+import { STAGE_WIDTH, STAGE_HEIGHT, TETROMINOS } from '@constants';
 
 export const createStage = () =>
   Array.from(Array(STAGE_HEIGHT), () =>
