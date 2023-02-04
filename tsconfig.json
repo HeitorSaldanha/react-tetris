@@ -13,14 +13,24 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@enums/*": ["./src/enums/*"],
+      "@constants": ["./src/constants/constants"],
+      "@types": ["./src/types/types"],
+      "@utils/*": ["./src/utils/*"],
+      "@images/*": ["./src/img/*"]
+    }
   },
   "include": [
-    "src"
+    "src/**/*",
   ]
 }
