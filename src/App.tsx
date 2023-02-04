@@ -39,7 +39,7 @@ const App: React.FC = () => {
 
   const gameArea = useRef<HTMLDivElement>(null);
 
-  const { player, updatePlayerPos, resetPlayer } = usePlayer();
+  const { player, rotatePlayer, updatePlayerPos, resetPlayer } = usePlayer();
   const { stage, setStage } = useStage(player, resetPlayer);
   const isColliding = useCollision();
 
@@ -64,7 +64,7 @@ const App: React.FC = () => {
       if (repeat) return;
       setDroptime(MOVE_DISTANCE.DOWN);
     } else if (keyCode === PLAYER_DIRECTION.UP) {
-      // TODO add rotation
+      rotatePlayer(stage);
     }
   };
 

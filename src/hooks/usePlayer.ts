@@ -1,8 +1,10 @@
 import { useState, useCallback } from 'react';
+
+import { TETROMINO_TYPE } from '@enums';
 import { INITIAL_POS, TETROMINOS } from '@constants';
 import { randomTetromino } from '@utils/gameHelpers';
-import { Player } from '@types';
-import { TETROMINO_TYPE } from '@enums';
+import { Stage, Player, TetrominoShape } from '@types';
+import { useCollision } from './useCollision';
 
 type UsePlayer = () => {
   player: Player;
@@ -16,6 +18,7 @@ type UsePlayer = () => {
     collided: boolean;
   }) => void;
   resetPlayer: () => void;
+  rotatePlayer: (stage: Stage) => void;
 };
 
 export const usePlayer: UsePlayer = () => {
@@ -27,6 +30,30 @@ export const usePlayer: UsePlayer = () => {
     tetromino: { shape: TETROMINOS?.EMPTY?.shape, type: TETROMINO_TYPE.EMPTY },
     collided: false,
   });
+  const isColliding = useCollision();
+
+  const rotate = (matrix: TetrominoShape) => {
+    const mtrx = matrix.map((_, i: number) =>
+      matrix.map((column) => column[i])
+    );
+    return mtrx.map((row) => row.reverse());
+  };
+
+  const rotatePlayer = (stage: Stage): void => {
+    const clonedPlayer = JSON.parse(JSON.stringify(player));
+    clonedPlayer.tetromino.shape = rotate(clonedPlayer.tetromino.shape);
+    const posX = clonedPlayer.pos.x;
+    let offset = 1;
+    while (isColliding(clonedPlayer, stage, { x: 0, y: 0 })) {
+      clonedPlayer.pos.x += offset;
+      offset = -(offset + (offset > 0 ? 1 : -1));
+      if (offset > clonedPlayer.tetromino.shape[0].length) {
+        clonedPlayer.pos.x = posX;
+        return;
+      }
+    }
+    setPlayer(clonedPlayer);
+  };
 
   const updatePlayerPos = ({
     x,
@@ -59,5 +86,5 @@ export const usePlayer: UsePlayer = () => {
     });
   }, []);
 
-  return { player, updatePlayerPos, resetPlayer };
+  return { player, rotatePlayer, updatePlayerPos, resetPlayer };
 };
