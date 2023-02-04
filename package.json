@@ -20,7 +20,9 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +45,7 @@
   "devDependencies": {
     "@types/node": "^16.18.11",
     "@types/styled-components": "^5.1.26",
-    "craco": "0.0.3"
+    "craco": "0.0.3",
+    "gh-pages": "^5.0.0"
   }
 }
