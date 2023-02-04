@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# React Tetris
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## [Try it now!](https://heitorsaldanha.github.io/react-tetris/)
+
+This is a very simple project based on this video tutorial by [Weibenfalk](https://youtu.be/jEjj2jvHpv4) I've made some changes, like using create react app instead of Vite, creating enum and constants files, implementing alias for the imports and many other minor things.
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and deployed to github pages.
 
 ## Available Scripts
 
