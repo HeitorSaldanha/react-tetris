@@ -22,7 +22,9 @@
     "test": "craco test",
     "eject": "craco eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "prepare": "husky install",
+    "lint": "eslint \"**/*.{ts,tsx}\""
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +48,8 @@
     "@types/node": "^16.18.11",
     "@types/styled-components": "^5.1.26",
     "craco": "0.0.3",
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "husky": "^8.0.0"
   }
 }
+
