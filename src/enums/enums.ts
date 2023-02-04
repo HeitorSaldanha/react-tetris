@@ -18,3 +18,10 @@ export enum CELL_TYPE {
   CLEAR = 'clear',
   MERGED = 'merged',
 }
+
+export enum PLAYER_DIRECTION {
+  LEFT = 37,
+  RIGHT = 39,
+  DOWN = 40,
+  UP = 38,
+}

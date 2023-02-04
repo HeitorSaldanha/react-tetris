@@ -11,10 +11,10 @@ export const createStage = () =>
   );
 
 export const randomTetromino = () => {
-  const tetrominos = Object.keys(TETROMINO_TYPE).map(
-    (type) => (type as TETROMINO_TYPE) && TETROMINO_TYPE.EMPTY
+  const validTetrominos = Object.values(TETROMINO_TYPE).filter(
+    (type) => type !== TETROMINO_TYPE.EMPTY
   );
   const newTetromino =
-    tetrominos[Math.floor(Math.random() * tetrominos.length)];
+    validTetrominos[Math.floor(Math.random() * validTetrominos.length)];
   return { type: newTetromino, ...TETROMINOS[newTetromino] };
 };

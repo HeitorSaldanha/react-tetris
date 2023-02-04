@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createStage } from '@utils/gameHelpers';
 import { Player, StageCell, Stage } from '@types';
 import { TETROMINO_TYPE, CELL_CONTENT, CELL_TYPE } from '@enums';
 
 type UpdateStage = (prevStage: Stage) => Stage;
 
-type UseStage = ({
-  player,
-  resetPlayer,
-}: {
-  player: Player;
-  resetPlayer: () => void;
-}) => {};
+type UseStage = (
+  player: Player,
+  resetPlayer: () => void
+) => { stage: Stage; setStage: (stage: Stage) => void };
 
-export const useStage: UseStage = ({ player, resetPlayer }) => {
+export const useStage: UseStage = (player, resetPlayer) => {
   const [stage, setStage] = useState(createStage());
 
   useEffect(() => {
@@ -28,7 +25,7 @@ export const useStage: UseStage = ({ player, resetPlayer }) => {
             ) as StageCell[]
         );
 
-        player.tetromino.shape.forEach((row, y) => {
+        player.tetromino.shape?.forEach((row, y) => {
           row.forEach((content, x) => {
             if (content !== CELL_CONTENT.EMPTY) {
               newStage[y + player.pos.y][x + player.pos.x] = [
@@ -46,7 +43,13 @@ export const useStage: UseStage = ({ player, resetPlayer }) => {
 
       setStage((prev) => updateStage(prev));
     }
-  }, [player.collided, player.pos?.x, player.pos?.y, player.tetromino]);
+  }, [
+    player.pos,
+    player.pos?.x,
+    player.pos?.y,
+    player.tetromino,
+    player.collided,
+  ]);
 
-  return {};
+  return { stage, setStage };
 };

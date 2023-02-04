@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
-import { INITIAL_POS } from '@constants';
+import { INITIAL_POS, TETROMINOS } from '@constants';
 import { randomTetromino } from '@utils/gameHelpers';
 import { Player } from '@types';
+import { TETROMINO_TYPE } from '@enums';
 
 type UsePlayer = () => {
   player: Player;
@@ -18,7 +19,14 @@ type UsePlayer = () => {
 };
 
 export const usePlayer: UsePlayer = () => {
-  const [player, setPlayer] = useState({} as Player);
+  const [player, setPlayer] = useState({
+    pos: {
+      x: 0,
+      y: 0,
+    },
+    tetromino: { shape: TETROMINOS?.EMPTY?.shape, type: TETROMINO_TYPE.EMPTY },
+    collided: false,
+  });
 
   const updatePlayerPos = ({
     x,
@@ -41,9 +49,13 @@ export const usePlayer: UsePlayer = () => {
 
   const resetPlayer = useCallback((): void => {
     const newTetromino = randomTetromino();
+    console.log({ newTetromino });
     setPlayer({
       pos: INITIAL_POS,
-      tetromino: { ...newTetromino },
+      tetromino: {
+        shape: newTetromino.shape,
+        type: newTetromino.type as TETROMINO_TYPE,
+      },
       collided: false,
     });
   }, []);

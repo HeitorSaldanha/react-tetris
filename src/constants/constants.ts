@@ -10,6 +10,7 @@ export const INITIAL_POS = {
   x: STAGE_WIDTH / 2 - 2,
   y: 0,
 };
+export const INITIAL_DROPTIME = 1000;
 
 // Tetrominos characteristics
 
