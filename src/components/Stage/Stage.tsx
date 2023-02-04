@@ -9,7 +9,11 @@ interface props {
 
 const Stage: React.FC<props> = ({ stage }) => (
   <StyledStage>
-    {stage.map((row) => row.map((cell, x) => <Cell key={x} type={cell[0]} />))}
+    {stage.map((row) =>
+      row.map((cell, x) => (
+        <Cell key={x} content={cell[0]} tetrominoType={cell[2]} />
+      ))
+    )}
   </StyledStage>
 );
 

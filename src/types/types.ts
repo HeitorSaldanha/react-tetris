@@ -1,12 +1,23 @@
-import { TETRAMINOS_TYPES } from '@enums/tetraminos';
+import { TETROMINO_TYPE, CELL_CONTENT, CELL_TYPE } from '@enums';
 
-export interface Tetramino {
+export type TetrominoShape = CELL_CONTENT[][];
+
+export interface Tetromino {
   [key: string]: {
-    shape: string[][];
+    shape: TetrominoShape;
     color: string;
   };
 }
 
-export type StageCell = [TETRAMINOS_TYPES, string];
+export type StageCell = [CELL_CONTENT, CELL_TYPE, TETROMINO_TYPE];
 
 export type Stage = StageCell[][];
+
+export interface Player {
+  pos: {
+    x: number;
+    y: number;
+  };
+  tetromino: { shape: TetrominoShape; type: TETROMINO_TYPE };
+  collided: boolean;
+}

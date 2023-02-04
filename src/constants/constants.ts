@@ -1,96 +1,120 @@
-import { Tetramino } from '@types';
-import { TETRAMINOS_TYPES } from '@enums/tetraminos';
+import { Tetromino } from '@types';
+import { TETROMINO_TYPE, CELL_CONTENT } from '@enums';
 
 // Stage settings
 
 export const STAGE_WIDTH = 12;
 export const STAGE_HEIGHT = 20;
 export const ROWPOINTS = [40, 100, 300, 1200];
-
-// Tetraminos characteristics
-
-const EMPTY_TETR: Tetramino = {
-  [TETRAMINOS_TYPES.EMPTY]: { shape: [['']], color: '0, 0, 0' },
+export const INITIAL_POS = {
+  x: STAGE_WIDTH / 2 - 2,
+  y: 0,
 };
 
-const I_TETR: Tetramino = {
-  [TETRAMINOS_TYPES.I]: {
+// Tetrominos characteristics
+
+const EMPTY_TETR: Tetromino = {
+  [TETROMINO_TYPE.EMPTY]: { shape: [[CELL_CONTENT.EMPTY]], color: '0, 0, 0' },
+};
+
+const I_TETR: Tetromino = {
+  [TETROMINO_TYPE.I]: {
     shape: [
-      ['', 'I', '', ''],
-      ['', 'I', '', ''],
-      ['', 'I', '', ''],
-      ['', 'I', '', ''],
+      [
+        CELL_CONTENT.EMPTY,
+        CELL_CONTENT.BRICK,
+        CELL_CONTENT.EMPTY,
+        CELL_CONTENT.EMPTY,
+      ],
+      [
+        CELL_CONTENT.EMPTY,
+        CELL_CONTENT.BRICK,
+        CELL_CONTENT.EMPTY,
+        CELL_CONTENT.EMPTY,
+      ],
+      [
+        CELL_CONTENT.EMPTY,
+        CELL_CONTENT.BRICK,
+        CELL_CONTENT.EMPTY,
+        CELL_CONTENT.EMPTY,
+      ],
+      [
+        CELL_CONTENT.EMPTY,
+        CELL_CONTENT.BRICK,
+        CELL_CONTENT.EMPTY,
+        CELL_CONTENT.EMPTY,
+      ],
     ],
     color: '80, 227, 230',
   },
 };
 
-const J_TETR: Tetramino = {
-  [TETRAMINOS_TYPES.J]: {
+const J_TETR: Tetromino = {
+  [TETROMINO_TYPE.J]: {
     shape: [
-      ['', 'J', ''],
-      ['', 'J', ''],
-      ['J', 'J', ''],
+      [CELL_CONTENT.EMPTY, CELL_CONTENT.BRICK, CELL_CONTENT.EMPTY],
+      [CELL_CONTENT.EMPTY, CELL_CONTENT.BRICK, CELL_CONTENT.EMPTY],
+      [CELL_CONTENT.BRICK, CELL_CONTENT.BRICK, CELL_CONTENT.EMPTY],
     ],
     color: '36, 95, 223',
   },
 };
 
-const L_TETR: Tetramino = {
-  [TETRAMINOS_TYPES.L]: {
+const L_TETR: Tetromino = {
+  [TETROMINO_TYPE.L]: {
     shape: [
-      ['', 'L', ''],
-      ['', 'L', ''],
-      ['', 'L', 'L'],
+      [CELL_CONTENT.EMPTY, CELL_CONTENT.BRICK, CELL_CONTENT.EMPTY],
+      [CELL_CONTENT.EMPTY, CELL_CONTENT.BRICK, CELL_CONTENT.EMPTY],
+      [CELL_CONTENT.EMPTY, CELL_CONTENT.BRICK, CELL_CONTENT.BRICK],
     ],
     color: '223, 173, 36',
   },
 };
 
-const O_TETR: Tetramino = {
-  [TETRAMINOS_TYPES.O]: {
+const O_TETR: Tetromino = {
+  [TETROMINO_TYPE.O]: {
     shape: [
-      ['O', 'O'],
-      ['O', 'O'],
+      [CELL_CONTENT.BRICK, CELL_CONTENT.BRICK],
+      [CELL_CONTENT.BRICK, CELL_CONTENT.BRICK],
     ],
     color: '223, 217, 36',
   },
 };
 
-const S_TETR: Tetramino = {
-  [TETRAMINOS_TYPES.S]: {
+const S_TETR: Tetromino = {
+  [TETROMINO_TYPE.S]: {
     shape: [
-      ['', 'S', 'S'],
-      ['S', 'S', ''],
-      ['', '', ''],
+      [CELL_CONTENT.EMPTY, CELL_CONTENT.BRICK, CELL_CONTENT.BRICK],
+      [CELL_CONTENT.BRICK, CELL_CONTENT.BRICK, CELL_CONTENT.EMPTY],
+      [CELL_CONTENT.EMPTY, CELL_CONTENT.EMPTY, CELL_CONTENT.EMPTY],
     ],
     color: '48, 211, 56',
   },
 };
 
-const T_TETR: Tetramino = {
-  [TETRAMINOS_TYPES.T]: {
+const T_TETR: Tetromino = {
+  [TETROMINO_TYPE.T]: {
     shape: [
-      ['', '', ''],
-      ['T', 'T', 'T'],
-      ['', 'T', ''],
+      [CELL_CONTENT.EMPTY, CELL_CONTENT.EMPTY, CELL_CONTENT.EMPTY],
+      [CELL_CONTENT.BRICK, CELL_CONTENT.BRICK, CELL_CONTENT.BRICK],
+      [CELL_CONTENT.EMPTY, CELL_CONTENT.BRICK, CELL_CONTENT.EMPTY],
     ],
     color: '132, 61, 198',
   },
 };
 
-const Z_TETR: Tetramino = {
-  [TETRAMINOS_TYPES.Z]: {
+const Z_TETR: Tetromino = {
+  [TETROMINO_TYPE.Z]: {
     shape: [
-      ['Z', 'Z', ''],
-      ['', 'Z', 'Z'],
-      ['', '', ''],
+      [CELL_CONTENT.BRICK, CELL_CONTENT.BRICK, CELL_CONTENT.EMPTY],
+      [CELL_CONTENT.EMPTY, CELL_CONTENT.BRICK, CELL_CONTENT.BRICK],
+      [CELL_CONTENT.EMPTY, CELL_CONTENT.EMPTY, CELL_CONTENT.EMPTY],
     ],
     color: '227, 78, 78',
   },
 };
 
-export const TETROMINOS: Tetramino = {
+export const TETROMINOS: Tetromino = {
   ...EMPTY_TETR,
   ...I_TETR,
   ...J_TETR,
